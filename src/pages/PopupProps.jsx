@@ -91,7 +91,7 @@ export const radiogroup_AddAnalyze = [
 
 export const formcontrol_AddAnalyze = [
   {  key: 'resnet50', label: "Resnet50", value: "Resnet50" },
-  {  key: 'vgg19', label: "VGG19", value: "VGG19"},
+ // {  key: 'vgg19', label: "VGG19", value: "VGG19"},
   {  key: 'vitb16', label: "ViTb16", value: "ViTb16"},
 ];
 
