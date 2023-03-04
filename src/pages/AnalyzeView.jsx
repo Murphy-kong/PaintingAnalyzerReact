@@ -78,6 +78,15 @@ const AnalyzeView = (props) => {
     console.log(data.session_Style_Accuracy);
     data.session_Artist_Accuracy.map((Artistsresult) => {
       console.log(Artistsresult.artistName);
+      console.log(Artistsresult)
+    });
+    data.session_Style_Accuracy.map((Artistsresult) => {
+      console.log(Artistsresult.styleName);
+      console.log(Artistsresult)
+    });
+    data.session_Genre_Accuracy.map((Artistsresult) => {
+      console.log(Artistsresult.genreName);
+      console.log(Artistsresult)
     });
   }, [data]);
 
@@ -214,19 +223,19 @@ const AnalyzeView = (props) => {
           ))}
         </div>
         <h1 className="display-4  text-lg text-gray-400">
-          Results for Artist:{" "}
+          Results for Style:{" "}
         </h1>
         <div>
           {data.session_Style_Accuracy.map((Artistsresult) => (
-            <TBlContainer_Genre props={Artistsresult} />
+            <TBlContaine_Style props={Artistsresult} />
           ))}
         </div>
         <h1 className="display-4  text-lg text-gray-400">
-          Results for Artist:{" "}
+          Results for Genre:{" "}
         </h1>
         <div>
           {data.session_Genre_Accuracy.map((Artistsresult) => (
-            <TBlContaine_Style props={Artistsresult} />
+            <TBlContainer_Genre props={Artistsresult} />
           ))}
         </div>
       </div>
