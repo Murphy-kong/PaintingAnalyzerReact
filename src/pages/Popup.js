@@ -50,7 +50,7 @@ function Popup(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    apifunction(formValues, cookies,userid, navigate)
+    apifunction(formValues, cookies,userid, navigate, img_pop)
     setOpenPopup(false)
   };
 

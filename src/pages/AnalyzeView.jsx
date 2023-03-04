@@ -217,7 +217,7 @@ const AnalyzeView = (props) => {
           Results for Artist:{" "}
         </h1>
         <div>
-          {data.session_Artist_Accuracy.map((Artistsresult) => (
+          {data.session_Style_Accuracy.map((Artistsresult) => (
             <TBlContainer_Genre props={Artistsresult} />
           ))}
         </div>
@@ -225,7 +225,7 @@ const AnalyzeView = (props) => {
           Results for Artist:{" "}
         </h1>
         <div>
-          {data.session_Artist_Accuracy.map((Artistsresult) => (
+          {data.session_Genre_Accuracy.map((Artistsresult) => (
             <TBlContaine_Style props={Artistsresult} />
           ))}
         </div>

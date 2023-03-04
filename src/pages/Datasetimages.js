@@ -19,7 +19,8 @@ const initialImageMethodValues = {
 
   const { currentColor } = useStateContext();
 
-  const host = "http://localhost:20336/"
+   //const host = "http://localhost:20336/"
+   const host = "https://paintinganalyzeraspnet.azurewebsites.net/"
 
   useEffect(() => {
     refreshEmployeeList();
@@ -84,7 +85,7 @@ const initialImageMethodValues = {
     for (var pair of formData.entries()) {
       console.log(pair[0] + ", " + pair[1]);
     }
-    if (formData.get("employeeID") == "0")
+    //if (formData.get("employeeID") == "0")
       employeeAPI()
         .create(formData)
         .then((res) => {
@@ -92,7 +93,7 @@ const initialImageMethodValues = {
           refreshEmployeeList();
         })
         .catch((err) => console.log(err));
-    else
+    /*else
       employeeAPI()
         .update(formData.get("employeeID"), formData)
         .then((res) => {
@@ -100,7 +101,7 @@ const initialImageMethodValues = {
           console.log("hallo2");
           refreshEmployeeList();
         })
-        .catch((err) => console.log(err));
+        .catch((err) => console.log(err));*/
   };
 
   const showRecordDetails = (data) => {

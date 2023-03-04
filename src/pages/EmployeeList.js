@@ -19,7 +19,9 @@ const initialImageMethodValues = {
 
   const { currentColor } = useStateContext();
 
-  const host = "http://localhost:20336/"
+  //const host = "http://localhost:20336/"
+  const host = "https://paintinganalyzeraspnet.azurewebsites.net/"
+  
 
   useEffect(() => {
     refreshEmployeeList();

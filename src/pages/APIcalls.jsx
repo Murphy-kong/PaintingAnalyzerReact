@@ -8,6 +8,9 @@ import { useStateContext } from "../contexts/ContextProvider";
 //export const hostURL = "http://localhost:20336/api"
 export const hostURL = "https://paintinganalyzeraspnet.azurewebsites.net/api"
 
+export const host2URL = "https://flaskpaintinganalyzer.azurewebsites.net"
+
+
 export const defaultavatar = hostURL + "/Images/defaultavatar.jpg"
 
 // User API
@@ -61,6 +64,18 @@ export const analyzegetallURL = hostURL + "/ImageUpload/GetImageswithAnalyzes"
 export const analyzeget_fromsingleuserURL = hostURL + "/ImageUpload/GetAnalyzesFromUser"
 
 export const analyze_single_withAccuracyURL = hostURL + "/Analyze/"
+
+export const analyze_create_URL = hostURL + "/Analyze/Get_data_From_Model"
+
+export const ml_URL = hostURL + "/Analyze/Get_data_From_Model"
+
+// Flask ML 
+
+export const ml_prediction_resnet_URL = host2URL + "/Get_Pred_Resnet50_2"
+
+export const ml_prediction_vgg19_URL = host2URL + "/Get_Pred_vgg19"
+
+export const ml_prediction_vitb16_URL = host2URL + "/Get_Pred_vit_b_16"
 
 
 export const LoginAPI = (url = loginURL) => {
@@ -349,6 +364,55 @@ export const UserDeleteAPI = (url = deleteuserURL) => {
           headers: {
             // Overwrite Axios's automatically set Content-Type
             "Content-Type": "text/plain",
+            "Authorization": `bearer ${access_token}`
+          },
+        }),
+    };
+  };
+
+  export const Flask_GetResults_Resnet_UserAPI =  (url = ml_prediction_resnet_URL) => {
+    return  {
+      SendData: ( newrecord) =>
+         axios.post(url,newrecord, {
+          headers: {
+            // Overwrite Axios's automatically set Content-Type
+            "Content-Type": "application/json",
+          },
+        }),
+    };
+  };
+
+  export const Flask_GetResults_VGG19_UserAPI =  (url = ml_prediction_vgg19_URL) => {
+    return  {
+      SendData: ( newrecord) =>
+         axios.post(url,newrecord, {
+          headers: {
+            // Overwrite Axios's automatically set Content-Type
+            "Content-Type": "application/json"
+          },
+        }),
+    };
+  };
+
+  export const Flask_GetResults_ViTb16_UserAPI =  (url = ml_prediction_vitb16_URL) => {
+    return  {
+      SendData: ( newrecord) =>
+         axios.post(url,newrecord, {
+          headers: {
+            // Overwrite Axios's automatically set Content-Type
+            "Content-Type": "application/json"
+          },
+        }),
+    };
+  };
+
+  export const AnalyzeCreation_UserAPI =  (url = analyze_create_URL) => {
+    return  {
+      SendData: ( access_token, newrecord) =>
+         axios.post(url,newrecord, {
+          headers: {
+            // Overwrite Axios's automatically set Content-Type
+            "Content-Type": "application/json",
             "Authorization": `bearer ${access_token}`
           },
         }),

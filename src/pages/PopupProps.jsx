@@ -1,4 +1,4 @@
-import { RegisterAdminAPI, RegisterAPI, UpdateOAccountAsAdminAPI } from "../pages/APIcalls";
+import { RegisterAdminAPI, RegisterAPI, UpdateOAccountAsAdminAPI, Flask_GetResults_Resnet_UserAPI,Flask_GetResults_VGG19_UserAPI, AnalyzeCreation_UserAPI,Flask_GetResults_ViTb16_UserAPI  } from "../pages/APIcalls";
 export const initialvalues = {
     userName: "",
     email: "",
@@ -90,15 +90,134 @@ export const radiogroup_AddAnalyze = [
 ];
 
 export const formcontrol_AddAnalyze = [
-  {  key: 'svm', label: "SVM", value: "SVM" },
-  {  key: 'Shallow Network', label: "Shallow", value: "Shallow Network"},
+  {  key: 'resnet50', label: "Resnet50", value: "Resnet50" },
+  {  key: 'vgg19', label: "VGG19", value: "VGG19"},
+  {  key: 'vitb16', label: "ViTb16", value: "ViTb16"},
 ];
 
 export const title_AddAnalyze = 'Add Analyze'
 export const radiogroup_Title_AddAnalyze = 'ML Algorithm'
 
 
-export const APISubmit_AddAnalyze = (formvalues,token,userid,navigate ) =>{
+export const  APISubmit_AddAnalyze = (formvalues,token,userid,navigate, img_pop ) =>{
   console.log("usenavigate")
-  navigate('/imagedataset')
+  console.log("imageid lautet: " + userid)
+  console.log(formvalues)
+  console.log(token)
+  console.log(img_pop)
+
+  var today = new Date();
+  var dd = String(today.getDate()).padStart(2, "0");
+  var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+  var yyyy = today.getFullYear();
+
+  today = yyyy + "-" + mm + "-" + dd;
+
+  const imagedata = JSON.stringify({
+    imageurl: img_pop
+  });
+  console.log(imagedata)
+
+  if(formvalues['ML_Model'] == 'Resnet50' )
+  {
+    Flask_GetResults_Resnet_UserAPI() 
+    .SendData(imagedata)
+    .then((res) =>{
+      console.log(res.data)
+      console.log(res.data['artist'])
+
+      const analyzedata = JSON.stringify({
+        analyzeID: 0,
+        imageID: userid,
+        mL_Model: "Resnet50",
+        acc_artist: res.data['artist_acc'],
+        result_artist: res.data['artist'],
+        acc_style: res.data['style_acc'],
+        result_style: res.data['style'],
+        acc_genre: res.data['genre_acc'],
+        result_genre: res.data['genre'],
+        releaseDate: today
+      });
+
+      AnalyzeCreation_UserAPI()
+      .SendData(token, analyzedata)
+      .then((res) => console.log(res))
+      .catch((err) => {
+        console.log(err);
+      });
+    })
+    .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  if(formvalues['ML_Model'] == 'VGG19' )
+  {
+    console.log("Es geht scho los")
+    Flask_GetResults_VGG19_UserAPI() 
+    .SendData(imagedata)
+    .then((res) =>{
+      console.log(res.data)
+      console.log(res.data['artist'])
+
+      const analyzedata = JSON.stringify({
+        analyzeID: 0,
+        imageID: userid,
+        mL_Model: "VGG19",
+        acc_artist: res.data['artist_acc'],
+        result_artist: res.data['artist'],
+        acc_style: res.data['style_acc'],
+        result_style: res.data['style'],
+        acc_genre: res.data['genre_acc'],
+        result_genre: res.data['genre'],
+        releaseDate: today
+      });
+
+      AnalyzeCreation_UserAPI()
+      .SendData(token, analyzedata)
+      .then((res) => console.log(res))
+      .catch((err) => {
+        console.log(err);
+      });
+    })
+    .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  if(formvalues['ML_Model'] == 'ViTb16' )
+  {
+    Flask_GetResults_ViTb16_UserAPI() 
+    .SendData(imagedata)
+    .then((res) =>{
+      console.log(res.data)
+      console.log(res.data['artist'])
+
+      const analyzedata = JSON.stringify({
+        analyzeID: 0,
+        imageID: userid,
+        mL_Model: "ViTb16",
+        acc_artist: res.data['artist_acc'],
+        result_artist: res.data['artist'],
+        acc_style: res.data['style_acc'],
+        result_style: res.data['style'],
+        acc_genre: res.data['genre_acc'],
+        result_genre: res.data['genre'],
+        releaseDate: today
+      });
+
+      AnalyzeCreation_UserAPI()
+      .SendData(token, analyzedata)
+      .then((res) => console.log(res))
+      .catch((err) => {
+        console.log(err);
+      });
+    })
+    .catch((err) => {
+        console.log(err);
+      });
+  }
+
+
+  //navigate('/imagedataset')
 }

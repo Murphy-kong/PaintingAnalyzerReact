@@ -50,6 +50,7 @@ export default function Datasetform(props) {
   };
 
   const showPreview = (e) => {
+    console.log(values)
     if (e.target.files && e.target.files[0]) {
       let imageFile = e.target.files[0];
       const reader = new FileReader();
@@ -97,13 +98,26 @@ export default function Datasetform(props) {
       today = yyyy + "-" + mm + "-" + dd;
       formData.append("imageName", values.employeeName);
       formData.append("occupation", values.occupation);
-      formData.append("imageFile", values.imageFile);
+     // formData.append("imageFile", values.imageFile);
       formData.append("releaseDate", today)
       formData.append("imageSrc", "");
       for (var pair of formData.entries()) {
         console.log(pair[0] + ", " + pair[1]);
       }
-      addOrEdit(formData, resetForm);
+      console.log(values.imageSrc)
+      var url = values.imageSrc
+      fetch(url)
+      .then(res => res.blob())
+      .then(blob => {
+        const file = new File([blob], "filename.jpg", { type: "image/jpeg" });
+        console.log(file)
+        formData.append("imageFile", file);
+      }).then(res =>
+        { 
+          addOrEdit(formData, resetForm)
+        })
+      
+      
     }
   };
 
@@ -125,8 +139,6 @@ export default function Datasetform(props) {
               alt="description"
             />
             <div className="card-body">
-              <div className="form-group">
-              </div>
               <div className="form-group">
                 <input
                   className={
